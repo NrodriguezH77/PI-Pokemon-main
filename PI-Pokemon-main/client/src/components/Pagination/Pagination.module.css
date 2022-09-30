@@ -1,0 +1,18 @@
+.nav{
+    display: flex;
+   justify-content:space-between ;
+   text-decoration: none;
+    
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btnDesactive {
+    cursor: not-allowed;
+}
+
+.current {
+    background-color: aqua;
+}

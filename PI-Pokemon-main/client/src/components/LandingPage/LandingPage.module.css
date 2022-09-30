@@ -1,0 +1,48 @@
+.padreLanding {
+    height: 100vh;
+    
+    background-position: 4rem;
+    background-repeat: no-repeat;
+    background-size: 90%; 
+    
+    background-color: black;
+    background-image: url('../../assets/img/pexels-abhishek-rana-4188296.jpg');
+}
+
+.divBtn{
+    overflow: hidden;
+}
+
+.btn {
+    margin: 20rem 0rem 0rem 50rem;
+    width: 20%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: rgba(255, 235, 205, 0.484);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px 0 rgb(255, 255, 255, .5);
+    cursor: pointer;
+    transition: ease-out .3s;
+
+    animation-duration: 3s;
+    animation-name: slidein;
+
+}
+
+@keyframes slidein {
+    from {
+      margin-left: 0%;
+       
+    }
+
+    to {
+      margin-left: 62.5%;
+
+    }
+  }
+
+.btn:hover {
+    background-color: rgba(255, 235, 205, 0.806); 
+}

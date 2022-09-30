@@ -4,13 +4,16 @@ const {Pokemon, Type} = require('../db')
 function normalizeInfoApi(infoApi){
     return {
         id: infoApi.data.id,
-        name: infoApi.data.name,
+        name: infoApi.data.name[0].toUpperCase() + infoApi.data.name.slice(1),
         types: infoApi.data.types?.map((e) => e.type.name).join(', '),
         hp: infoApi.data.stats[0].base_stat,
         attack:infoApi.data.stats[1].base_stat,
         defense: infoApi.data.stats[2].base_stat,
         speed: infoApi.data.stats[5].base_stat,
         image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${infoApi.data.id}.svg`,
+        height: infoApi.data.height,
+        weight: infoApi.data.weight,
+        createdBd: false,
     }
 }
 
@@ -23,7 +26,10 @@ function normalizeInfoDb(infoDb){
         attack: infoDb.attack,
         defense: infoDb.defense,
         speed: infoDb.speed,
-        image: infoDb.image
+        image: infoDb.image,
+        height: infoDb.height,
+        weight: infoDb.weight,
+        createdBd: true,
     }
 }
 
@@ -67,8 +73,6 @@ async function getPokemonsBd(){
 async function getAllPokemons(){
     const pokemonsApi = await getPokemonsApi();
     const pokemonsBd = await getPokemonsBd();
-    console.log(pokemonsApi)
-    console.log(pokemonsBd)
     return pokemonsApi.concat(pokemonsBd);
 }
 
@@ -117,19 +121,48 @@ async function getPokemonById(id){
 
 
 async function postPokemon(name, hp, attack, speed, defense, height, weight, image, types){
-    name = name[0].toUpperCase() + name.slice(1);
-    const pokemonExist = await Pokemon.findOne({
-        where: {name}
-    });
+   
+    
+        // Busqueda por name a la API
+       
+        
+    try {
+        name = name.toLowerCase()
+        const infoApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        return true;
+        
+    } catch (error) {
+        // Busqueda por name a la BD
+        name = name[0].toUpperCase() + name.slice(1);
+        const pokemon = await Pokemon.findOne({
+            where : {name: name},
+            include: {
+                model: Type,
+                attributes: ['name']  
+            }
+        });
+        
+        if(pokemon !== null) throw new Error('Este Pokemon ya existe');
 
-    if(pokemonExist !== null) throw new Error('Pokemon not found BD');
+        const  pokemons = await Pokemon.create({name, hp, attack, speed, defense, height, weight, image});
+        
+        if(types.length === 1) await pokemons.addTypes(types[0]);
+        else if(types.length > 1){
+            const promises = types.map(t => pokemons.addTypes(t))
+            await Promise.all(promises)
+        }else if(types.length === 0){
+            types = [19]
+            await pokemons.addTypes(types[0]);
+        }
 
-    const  pokemon = await Pokemon.create({name, hp, attack, speed, defense, height, weight, image});
-    if(types.length === 1) await pokemon.addTypes(types[0]);
-    if(types.length > 1){
-        const promises = types.map(t => pokemon.addTypes(t))
-        await Promise.all(promises)
-    };
+    }
+   
+
+
+
+    
+
+   
     
         
 }

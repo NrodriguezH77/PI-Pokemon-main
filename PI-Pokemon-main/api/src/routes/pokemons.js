@@ -36,7 +36,9 @@ router.post('/', async (req, res) => {
     const {name, hp, attack, speed, defense, height, weight, image, types} = req.body;
     if(!name) return res.status(404).json({error: '¡Faltan datos obligatorios!'})
     try {
-        await postPokemon(name, hp, attack, speed, defense, height, weight, image, types);
+       const exist = await postPokemon(name, hp, attack, speed, defense, height, weight, image, types);
+       console.log(exist)
+       if(exist) throw new Error('Este Pokemon ya existe');
         res.json({success: 'Pokemon creado con exito'});
     } catch (error) {
         res.status(404).json({error: error.message})

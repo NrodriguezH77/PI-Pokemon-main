@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+
 import style from './Cards.module.css';
 import Card from '../Card/Card'
 
 export default function Cards({pokemons}) {
-   // const pokemons = useSelector(state => state.pokemonsLoaded)
-
     return ( 
         <div className={style.padre}>
             {

@@ -11,7 +11,8 @@ export const FILTER_POKEMONS_BY_ATTACK = 'FILTER_POKEMONS_BY_ATTACK'
 export const FILTER_POKEMONS_BY_TYPE = 'FILTER_POKEMONS_BY_TYPE'
 export const LOADING_TRUE = 'LOADING_TRUE';
 export const LOADING_FALSE = 'LOADING_FALSE';
-  
+export const EMPTY_DETAIL = 'EMPTY_DETAIL';  
+
 export function getAllPokemons(){
     return async  function(dispatch){
         const pokemons = await axios.get('http://localhost:3001/pokemons');
@@ -61,13 +62,21 @@ export function getPokemonDetail(id){
 }
 
 export function postPokemon(pokemon){
-    console.log('log en posPokemon')
     return async function(dispatch){
+       try {
         const created = await axios.post('http://localhost:3001/pokemons', pokemon)
+        alert('Pokemon creado exitosamente')
         return dispatch({
             type: POST_POKEMON,
-            payload: created
+            payload: created.data.success
         })
+       } catch (error) {
+        alert('El pokemon ya existe!')
+        return dispatch({
+            type: POST_POKEMON,
+            payload: 'El pokemon ya existe!'
+        })
+       }
     }
 }
 
@@ -108,5 +117,13 @@ export function loadingFalse(){
     return {
         type: LOADING_FALSE,
         payload: false,
+    }
+}
+
+
+export function emptyDetail(){
+    return {
+        type: EMPTY_DETAIL,
+        payload: {},
     }
 }

@@ -1,9 +1,7 @@
 .imgCard {
     height: 150px;
     width: 200px;
-    border-radius: 100px;
 }
-
 .padre {
     display: flex;
     flex-direction: column;
@@ -11,12 +9,33 @@
     justify-content: center;
     text-align: center;
     color: #dbd7db;
-    border: 1px #bcbbbc solid;
+    border: 1px #8676ff solid;
     border-radius: 6px;
     padding: 10px;
     height: 45vh;
     width: 230px;
-    background-color: #1f2937;
+    background-color: #1f29377d;
     font-family: 'Times New Roman', Times, serif;
-    margin: 10px;
+    margin: 20px;
+}
+
+.hijo {
+    transition: all .2s;
+}
+
+.hijo:hover {
+    transform: scale(0.98);
+}
+
+.link {
+    text-decoration: none;
+}
+
+
+.padre:hover {
+    background-image: linear-gradient(163deg, #00ff7779 0%, #3700ff7d 100%);
+}
+
+.p {
+    font-weight: bold;
 }

@@ -7,7 +7,6 @@ export default function LandingPage() {
         <div className={style.padreLanding}>
            <div className='divBtn'>
             <Link to={'/home'}> <input className={style.btn} type="button" value='INGRESAR'/>  </Link>  
-            <h1>hol?</h1>
            </div> 
         </div>
      );

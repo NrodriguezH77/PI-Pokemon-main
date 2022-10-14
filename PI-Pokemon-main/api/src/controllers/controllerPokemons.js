@@ -21,7 +21,7 @@ function normalizeInfoDb(infoDb){
     return {
         id: infoDb.id,
         name: infoDb.name,
-        types: infoDb.Types?.map(t => t.name).join(', '),
+        types: infoDb.Types?.map(t => t.name.toLowerCase()).join(', '),
         hp: infoDb.hp,
         attack: infoDb.attack,
         defense: infoDb.defense,
@@ -113,7 +113,6 @@ async function getPokemonById(id){
                 model: Type,
                 attributes: ['name']
            }})
-           console.log(pokemon)
         if(pokemon === null) throw Error('No existe un Pokemon con el id proporcionado');
         return normalizeInfoDb(pokemon);
    }
@@ -121,11 +120,15 @@ async function getPokemonById(id){
 
 
 async function postPokemon(name, hp, attack, speed, defense, height, weight, image, types){
-   
-    
+   !hp ? hp = 1 : null;
+   !attack ? attack = 1 : null;
+   !speed ? speed = 1 : null;
+   !defense ? defense = 1 : null;
+   !height ? height = 1 : null;
+   !weight ? weight = 1 : null;
+   !types ? types =  [19]: null;
+
         // Busqueda por name a la API
-       
-        
     try {
         name = name.toLowerCase()
         const infoApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -135,11 +138,7 @@ async function postPokemon(name, hp, attack, speed, defense, height, weight, ima
         // Busqueda por name a la BD
         name = name[0].toUpperCase() + name.slice(1);
         const pokemon = await Pokemon.findOne({
-            where : {name: name},
-            include: {
-                model: Type,
-                attributes: ['name']  
-            }
+            where : {name},
         });
         
         if(pokemon !== null) throw new Error('Este Pokemon ya existe');

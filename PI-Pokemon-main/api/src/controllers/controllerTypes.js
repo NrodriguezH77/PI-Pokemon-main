@@ -3,7 +3,7 @@ const { Type } = require('../db.js')
 
 function normalizeInfoTypes(infoApi){
     return {
-        name: infoApi.name,
+        name: infoApi.name[0].toUpperCase() + infoApi.name.slice(1) ,
     }
 }
 async function getAllTypes(){

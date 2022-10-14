@@ -1,18 +1,34 @@
 .nav{
     display: flex;
-   justify-content:space-between ;
-   text-decoration: none;
-    
+    justify-content:space-between ;
+    text-decoration: none;
+    margin: 0 23rem;
+    padding: .3rem 1rem;
+
 }
 
-.btn {
+.btn, .x {
     cursor: pointer;
+    background-color:  transparent;
+    color: antiquewhite;
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+}
+
+li {
+    list-style: none;
 }
 
 .btnDesactive {
     cursor: not-allowed;
 }
 
-.current {
-    background-color: aqua;
+
+.x {
+    background-color: #1f2937;
+    border-radius: 45%;
+    border: 1px solid;
+
 }

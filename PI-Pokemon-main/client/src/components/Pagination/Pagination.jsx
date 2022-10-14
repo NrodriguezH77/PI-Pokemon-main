@@ -12,12 +12,12 @@ export default  function Pagination({postPerPage, totalPost, handdlePages, curre
                 <li><button className={style.btn} type="button" onClick={() => currentPage > 1 && handdlePages(currentPage-1)}>Prev</button></li>
                 {
                     pageNumbers?.map(page => (
-                       <li key={page}>
-                         <button type="button" onClick={() => handdlePages(page)}>{page}</button>
+                       <li className={style.li} key={page}>
+                         <button className={page === currentPage ? style.x: style.btn} type="button" onClick={() => handdlePages(page)}>{page}</button>
                        </li>
                     ))
                 }
-                <li><button type="button"  onClick={() => currentPage < pageNumbers.length && handdlePages(currentPage+1)}>Next</button></li>
+                <li><button  className={style.btn} type="button"  onClick={() => currentPage < pageNumbers.length && handdlePages(currentPage+1)}>Next</button></li>
             </nav>
                     
             

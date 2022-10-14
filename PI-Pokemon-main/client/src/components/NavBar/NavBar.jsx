@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { filterPokemonsAlphabetically, filterPokemonsByAttack, filterPokemonsByType, filterPokemonsCreated, getPokemonByName, getTypes } from '../../redux/actions';
 import style from './NavBar.module.css'
 
-export default function NavBar({actualizarEstado}) {
+export default function NavBar({actualizarEstado, setCurrentPage}) {
     const [name, setName] = useState('');
     const [state, setState] = useState('');
     const types = useSelector(state => state.pokemonTypes)
@@ -27,28 +26,32 @@ export default function NavBar({actualizarEstado}) {
     function filterPokemons(e){
         const select = e.target.name;
         const value = e.target.value;
-        console.log(select, '  ', value)
+        //console.log(select, '  ', value)
         if(select === 'created'){
             dispatch(filterPokemonsCreated(value))
+            setCurrentPage(1);
         }else if(select === 'types'){
             dispatch(filterPokemonsByType(value))
+            setCurrentPage(1);
         }else if(select === 'orderAlphabetical'){
             dispatch(filterPokemonsAlphabetically(value))
             actualizarEstado(value)
+            setCurrentPage(1);
         }else if(select === 'orderByAttack'){
             dispatch(filterPokemonsByAttack(value))
             actualizarEstado(value)
+            setCurrentPage(1);
         }
     }
-    return ( 
-        <div>
+    return ( <div>
+        
+        <div className={style.padre}>
 
                 <div>
                     <form onSubmit={(e) => handleSubmit(e)} name='form'>
-                    <input className={style.inputText} type="text" name='name' value={name}  onChange={handleChange} />
+                    <input className={style.inputText} type="text" name='name' value={name} autoComplete onChange={handleChange} />
                     <input className={style.inputSubmit} type="submit" value='Buscar'/>
                     </form>
-                    <Link to={'/createPokemon'}><input type="button" value="Crear Pokemon"/></Link>
                 </div>
                 <select className={style.select} name="created" onChange={filterPokemons}>
                   <option selected >Creados/API</option>
@@ -79,7 +82,8 @@ export default function NavBar({actualizarEstado}) {
                   <option value="desc">Descendente</option>
                 </select>
 
-             
         </div>
+        <hr/>
+    </div>
      );
 }

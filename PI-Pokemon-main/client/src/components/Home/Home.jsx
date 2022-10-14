@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, loadingTrue } from '../../redux/actions';
 import loaderGif from '../../assets/img/ball-pokemon.gif'
 import loaderGif2 from '../../assets/img/pokeaball.gif'
-
+import Header from '../Header/Header';
+import Loading from '../Loading/Loading'
 
 export default function Home() {
     const [state, setState] = useState(''); //estado para que se rerenderice el componente
@@ -22,7 +23,7 @@ export default function Home() {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(loadingTrue())
+        //dispatch(loadingTrue())
         dispatch(getAllPokemons())
     }, [])
 
@@ -33,18 +34,21 @@ export default function Home() {
     function handdlePages(page){
         setCurrentPage(page);
     }
+
     function refresh(){
         dispatch(getAllPokemons())
         dispatch(loadingTrue())
         setCurrentPage(1)
     }
+    
     return ( 
-        <div>
-           
-            <NavBar actualizarEstado = {actualizarEstado}/>
-            <button type="button" onClick={refresh}>Refresh</button>
+        <div className={style.padre}>
+            <Header refresh={refresh}/>
+            <NavBar actualizarEstado = {actualizarEstado} setCurrentPage = {setCurrentPage}/>
             {!loading && <Pagination currentPage={currentPage} postPerPage={postPerPage} totalPost={pokemons.length}  handdlePages={handdlePages}/>}
-            {loading ? <p>Loading...</p> : <Cards pokemons={currentPosts}/>}
+            {loading ? <center>
+                <Loading/>
+            </center> : <Cards pokemons={currentPosts}/>}
             
         </div>
      );

@@ -10,6 +10,7 @@ import {
   FILTER_POKEMONS_BY_ATTACK,
   LOADING_TRUE,
   LOADING_FALSE,
+  EMPTY_DETAIL,
 } from "./actions";
 
 const initialState = {
@@ -50,8 +51,10 @@ export default function reducer(state = initialState, action) {
       };
 
     case POST_POKEMON:
-      alert(action.payload)
-      return state
+      return {
+        ...state,
+        loading: false
+      }
 
     case FILTER_POKEMONS_CREATED:
       if (action.payload === "api") {
@@ -73,7 +76,7 @@ export default function reducer(state = initialState, action) {
       } else {
         return {
           ...state,
-          pokemonsLoaded: state.allPokemons,
+          pokemonsLoaded: state.pokemonsLoaded,
         };
       }
 
@@ -83,14 +86,14 @@ export default function reducer(state = initialState, action) {
         return {
           ...state,
           pokemonsLoaded: state.allPokemons?.filter((p) =>
-            p.types.includes(action.payload)
+            p.types.includes(action.payload.toLowerCase())
           ),
           loading: false,
         };
       } else {
         return {
           ...state,
-          pokemonsLoaded: state.allPokemons,
+          pokemonsLoaded: state.pokemonsLoaded,
         };
       }
 
@@ -116,7 +119,7 @@ export default function reducer(state = initialState, action) {
         }else{
             return {
                 ...state,
-                pokemonsLoaded: state.allPokemons,
+                pokemonsLoaded: state.pokemonsLoaded,
             }
         }
 
@@ -138,7 +141,7 @@ export default function reducer(state = initialState, action) {
             }else{
                 return {
                     ...state,
-                    pokemonsLoaded: state.allPokemons,
+                    pokemonsLoaded: state.pokemonsLoaded,
                 }
             }
 
@@ -153,6 +156,12 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 loading: action.payload
             }
+
+        case EMPTY_DETAIL:
+          return {
+            ...state,
+            pokemonDetail: action.payload
+          }
             
     default:
       return state;

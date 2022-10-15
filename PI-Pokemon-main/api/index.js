@@ -22,9 +22,10 @@ const { chargeAndGetAllTypes } = require('./src/controllers/controllerTypes.JS')
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
+server.listen(3001, () => {
+  console.log('listening at 3001'); // eslint-disable-line no-console
+});
 conn.sync({ force: true }).then(() => {
   chargeAndGetAllTypes()
-  server.listen(3001, () => {
-    console.log('listening at 3001'); // eslint-disable-line no-console
-  });
+  
 });

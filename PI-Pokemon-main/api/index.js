@@ -20,11 +20,13 @@
 const server = require('./src/app.js');
 //const { chargeAndGetAllTypes } = require('./src/controllers/controllerTypes.JS');
 const { conn } = require('./src/db.js');
-
+const {
+  PORT,
+} = process.env;
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   //chargeAndGetAllTypes()
-  server.listen(3001, () => {
-    console.log('listening at 3001'); // eslint-disable-line no-console
+  server.listen(PORT, () => {
+    console.log('listening at ' + PORT); // eslint-disable-line no-console
   });
 });

@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b432037c.chunk.css",
+    "main.js": "/static/js/main.75d3ca84.chunk.js",
+    "main.js.map": "/static/js/main.75d3ca84.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d4337050.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d4337050.js.map",
+    "static/js/2.f79dd049.chunk.js": "/static/js/2.f79dd049.chunk.js",
+    "static/js/2.f79dd049.chunk.js.map": "/static/js/2.f79dd049.chunk.js.map",
+    "static/js/3.fd80b954.chunk.js": "/static/js/3.fd80b954.chunk.js",
+    "static/js/3.fd80b954.chunk.js.map": "/static/js/3.fd80b954.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.b432037c.chunk.css.map": "/static/css/main.b432037c.chunk.css.map",
+    "static/js/2.f79dd049.chunk.js.LICENSE.txt": "/static/js/2.f79dd049.chunk.js.LICENSE.txt",
+    "static/media/ball-pokemon.1e8e196e.gif": "/static/media/ball-pokemon.1e8e196e.gif",
+    "static/media/go-back256_24856.2dfa0208.png": "/static/media/go-back256_24856.2dfa0208.png",
+    "static/media/LandingPage.module.css": "/static/media/pexels-abhishek-rana-4188296.2591ef38.jpg",
+    "static/media/pokeaball.b7cd3e0a.gif": "/static/media/pokeaball.b7cd3e0a.gif",
+    "static/media/pokemon-logo-png-0.5b8a5f11.png": "/static/media/pokemon-logo-png-0.5b8a5f11.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d4337050.js",
+    "static/js/2.f79dd049.chunk.js",
+    "static/css/main.b432037c.chunk.css",
+    "static/js/main.75d3ca84.chunk.js"
+  ]
+}

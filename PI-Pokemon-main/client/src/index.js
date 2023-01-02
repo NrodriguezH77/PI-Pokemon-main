@@ -7,7 +7,11 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
-axios.defaults.baseURL = "https://pokemon-app-dsyj.onrender.com" || "http://localhost:3001" ;
+const config = require('./config');
+const {
+  URL_BACK,
+} = config;
+axios.defaults.baseURL = /* "https://pokemon-app-dsyj.onrender.com" || */ URL_BACK ;
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

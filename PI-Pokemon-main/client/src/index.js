@@ -8,10 +8,9 @@ import store from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 const config = require('./config');
-const {
-  URL_BACK,
-} = config;
-axios.defaults.baseURL = /* "https://pokemon-app-dsyj.onrender.com" || */ URL_BACK ;
+let URL;
+process.env.NODE_ENV === "development" ? URL = config.URL_DEV : URL = config.URL_PROD;
+axios.defaults.baseURL = /* "https://pokemon-app-dsyj.onrender.com" || */ URL ;
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

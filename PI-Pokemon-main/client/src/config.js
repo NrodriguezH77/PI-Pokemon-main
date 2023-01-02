@@ -1,3 +1,5 @@
 module.exports = {
-    URL_BACK: "http://localhost:3001"
+    URL_DEV: "http://localhost:3001",
+    URL_PROD: "https://pokemon-app-dsyj.onrender.com"
+
 }

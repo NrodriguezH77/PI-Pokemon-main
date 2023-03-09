@@ -10,7 +10,7 @@ import axios from "axios";
 const config = require('./config');
 let URL;
 process.env.NODE_ENV === "development" ? URL = config.URL_DEV : URL = config.URL_PROD;
-axios.defaults.baseURL = /* "https://pokemon-app-dsyj.onrender.com" || */ URL ;
+axios.defaults.baseURL = URL ;
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
